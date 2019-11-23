@@ -230,12 +230,12 @@ class PluginDetail extends React.PureComponent {
               <ul>
                 {active.map(warning => {
                   return (
-                    <li>
+                    <li key={warning.url}>
                       <h3><a href={warning.url}>{warning.message}</a></h3>
                       <ul>
                         {warning.versions.map(version => {
                           return (
-                            <li>
+                            <li key={version}>
                               {this.getReadableVersion(version, true)}
                             </li>
                           )
@@ -266,12 +266,12 @@ class PluginDetail extends React.PureComponent {
         <ul>
           {inactive.map(warning => {
             return (
-              <li>
+              <li key={warning.url}>
                 <h7><a href={warning.url}>{warning.message}</a></h7>
                 <ul>
                   {warning.versions.map(version => {
                     return (
-                      <li>
+                      <li key={version}>
                         {this.getReadableVersion(version, false)}
                       </li>
                     )
