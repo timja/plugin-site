@@ -57,6 +57,9 @@ const downloadHeader = () => {
         $('head').prepend('{{> header }}');
         // Even though we're supplying our own this one still causes a conflict.
         $('link[href="https://jenkins.io/css/font-icons.css"]').remove();
+        // Prevents: Access to resource at 'https://jenkins.io/site.webmanifest' from origin 'https://plugins.jenkins.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+        $('link[href="https://jenkins.io/site.webmanifest"]').remove()
+        
         $('head').append('<script>window.__REDUX_STATE__ = {{{reduxState}}};</script>');
         $('#grid-box').append('{{{rendered}}}');
         $('#grid-box').after('<script type="text/javascript" src="{{jsPath}}/main.js"></script>');
