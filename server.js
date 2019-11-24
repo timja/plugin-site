@@ -15,6 +15,7 @@ import fs from 'fs';
 import unirest from 'unirest';
 import cheerio from 'cheerio';
 import schedule from 'node-schedule';
+import { Helmet } from "react-helmet";
 
 const app = express();
 const port = 5000;
@@ -55,6 +56,10 @@ const downloadHeader = () => {
           }
         });
         $('head').prepend('{{> header }}');
+        $('head').prepend('{{ title }}');
+        $('head').prepend('{{ meta }}');
+        $('head').prepend('{{ link }}');
+        
         // Even though we're supplying our own this one still causes a conflict.
         $('link[href="https://jenkins.io/css/font-icons.css"]').remove();
         // Prevents: Access to resource at 'https://jenkins.io/site.webmanifest' from origin 'https://plugins.jenkins.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
@@ -113,11 +118,18 @@ app.get('*', (req, res, next) => {
             </Provider>
           </div>
         );
+        const helmet = Helmet.renderStatic();
         const pluginSiteApiVersion = store.getState().data.info.commit.substring(0, 7);
         const reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c');
         const pluginNotFound = req.url !== '/' && store.getState().ui.plugin === null;
+
+        console.log(`Title: ${helmet.title.toString()}`)
+
         res.status(pluginNotFound ? 404 : 200).render('layouts/main', {
           rendered,
+          title: helmet.title.toString(),
+          meta: helmet.meta.toString(),
+          link: helmet.link.toString(),
           reduxState,
           jsPath,
           pluginSiteVersion,

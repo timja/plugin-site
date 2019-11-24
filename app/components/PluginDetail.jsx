@@ -11,7 +11,6 @@ import { cleanTitle } from '../commons/helper';
 import { firstVisit, isFetchingPlugin, labels, plugin } from '../selectors';
 import { actions } from '../actions';
 import { createSelector } from 'reselect';
-import {ReactTitle} from 'react-meta-tags';
 
 class PluginDetail extends React.PureComponent {
 
@@ -315,7 +314,6 @@ class PluginDetail extends React.PureComponent {
     const beforeClose = this.closeDialog;
     return (
       <ModalView hideOnOverlayClicked isVisible ignoreEscapeKey {...{beforeClose}}>
-        <ReactTitle title="Page 2"/>
         <Header>
           <div className="back" onClick={beforeClose}>Find plugins</div>
         </Header>

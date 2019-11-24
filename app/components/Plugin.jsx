@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import styles from '../styles/Main.css';
 import Icon from './Icon';
 import { cleanTitle } from '../commons/helper';
+import { Helmet } from "react-helmet";
 
 export default class Plugin extends React.PureComponent {
 
@@ -97,6 +98,12 @@ export default class Plugin extends React.PureComponent {
     );
     return (
       <div key={this.props.plugin.name} className={classNames(styles.Item, 'Entry-box')}>
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>My Title</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+            <meta content="hi" name="aaa" />
+        </Helmet>
         {plugin}
       </div>
     );
