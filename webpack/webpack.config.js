@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const cssnext = require('postcss-cssnext');
+const cssPresetEnv = require('postcss-preset-env');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -40,7 +40,7 @@ if (release) {
   plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
 } else {
   plugins.push(new HtmlWebpackPlugin({
-    template: path.resolve(VIEWS_DIR, 'index.hbs'),
+    template: path.resolve(VIEWS_DIR, 'layouts', 'main.hbs'),
     filename: 'index.html',
     inject: false
   }));
@@ -85,7 +85,7 @@ const config = {
   },
   plugins: plugins,
   postcss: function () {
-    return [cssnext];
+    return [cssPresetEnv];
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

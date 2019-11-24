@@ -44,7 +44,7 @@ This uses server side rendering to help ensure SEO results. This does _not_ enab
 If `REST_API_URL` is unset it defaults to https://plugins.jenkins.io/api.
 
 When using server side rendering, the application will download a header from an external location and inject itself
-into the content and replace the view/index.hbs. This is _intended_ for use in the Dockerfile production deployment.
+into the content and replace the view/layouts/main.hbs. This is _intended_ for use in the Dockerfile production deployment.
 By default the location is https://jenkins.io/plugins/index.html. To specify a different location supply the
 `HEADER_FILE` environment variable.
 

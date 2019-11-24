@@ -64,7 +64,7 @@ const downloadHeader = () => {
         $('#grid-box').append('{{{rendered}}}');
         $('#grid-box').after('<script type="text/javascript" src="{{jsPath}}/main.js"></script>');
         $('#creativecommons').append('{{> version }}');
-        fs.writeFileSync('./views/index.hbs', $.html());
+        fs.writeFileSync('./views/layouts/main.hbs', $.html());
       } else {
         console.error(response.statusCode);
         console.error(error);
@@ -116,7 +116,7 @@ app.get('*', (req, res, next) => {
         const pluginSiteApiVersion = store.getState().data.info.commit.substring(0, 7);
         const reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c');
         const pluginNotFound = req.url !== '/' && store.getState().ui.plugin === null;
-        res.status(pluginNotFound ? 404 : 200).render('index', {
+        res.status(pluginNotFound ? 404 : 200).render('layouts/main', {
           rendered,
           reduxState,
           jsPath,
